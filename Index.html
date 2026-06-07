@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chifa Hongyun — Carta</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── DESIGN SYSTEM: Luxury Chinese Lacquerware ── */
+:root{
+  --ink:#0A0604;
+  --lacquer:#7B1010;
+  --lacquer2:#9C1515;
+  --gold:#C4912A;
+  --gold2:#E2B554;
+  --gold3:rgba(196,145,42,0.12);
+  --cream:#F5ECD7;
+  --parchment:#EDD9B0;
+  --text:#2A1A0A;
+  --muted:#7A5A3A;
+  --dim:#B09070;
+  --border:rgba(196,145,42,0.2);
+  --border2:rgba(196,145,42,0.5);
+  --surface:rgba(196,145,42,0.06);
+  --surface2:rgba(196,145,42,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--ink);
+  color:var(--cream);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── HERO ── */
+.hero{
+  position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 80% 60% at 50% 30%, #5C0A0A 0%, #2A0505 40%, var(--ink) 100%);
+  padding:4rem 2rem 4rem;text-align:center;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C4912A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero-char{
+  font-family:'Cinzel',serif;font-size:340px;font-weight:700;
+  color:rgba(196,145,42,0.04);position:absolute;
+  top:-60px;right:-40px;line-height:1;pointer-events:none;user-select:none;
+  letter-spacing:-10px;
+}
+.hero-char2{
+  font-family:'Cinzel',serif;font-size:200px;
+  color:rgba(255,255,255,0.02);position:absolute;
+  bottom:-30px;left:-20px;line-height:1;pointer-events:none;user-select:none;
+}
+.medallion{
+  width:90px;height:90px;
+  border:1.5px solid var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 2rem;position:relative;
+}
+.medallion::before{
+  content:'';position:absolute;inset:6px;
+  border:1px solid rgba(196,145,42,0.3);border-radius:50%;
+}
+.medallion-char{
+  font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);font-weight:600;
+}
+.hero-name{
+  font-family:'Cinzel',serif;font-size:clamp(2rem,7vw,3.8rem);
+  font-weight:700;letter-spacing:4px;
+  background:linear-gradient(135deg,var(--gold2) 0%,var(--gold) 50%,var(--parchment) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.5rem;
+}
+.hero-sub{
+  font-family:'Cormorant Garamond',serif;font-size:1rem;
+  color:var(--gold);letter-spacing:6px;text-transform:uppercase;
+  font-weight:300;margin-bottom:2rem;
+}
+.orn{display:flex;align-items:center;gap:12px;max-width:240px;margin:0 auto}
+.orn-l{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn-r{flex:1;height:1px;background:linear-gradient(270deg,transparent,var(--gold))}
+.orn-d{width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
+.scroll-hint{display:none}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ── NAV ── */
+.nav-wrap{
+  position:sticky;top:0;z-index:200;
+  background:rgba(10,6,4,0.97);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+/* Botón hamburguesa visible siempre */
+.nav-toggle{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 1.2rem;cursor:pointer;max-width:720px;margin:0 auto;
+  user-select:none;
+}
+.nav-toggle-left{display:flex;align-items:center;gap:10px}
+.nav-toggle-label{
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);font-family:'DM Sans',sans-serif;
+}
+.nav-active-name{
+  font-size:12px;font-weight:500;color:var(--gold);
+  letter-spacing:.5px;font-family:'DM Sans',sans-serif;
+}
+.nav-arrow{
+  font-size:10px;color:var(--muted);
+  transition:transform .3s;
+}
+.nav-wrap.open .nav-arrow{transform:rotate(180deg)}
+/* Panel desplegable con grid */
+.nav-panel{
+  display:none;
+  max-width:720px;margin:0 auto;
+  padding:10px 1rem 14px;
+  border-top:1px solid var(--border);
+}
+.nav-wrap.open .nav-panel{display:block}
+.nav-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  gap:6px;
+}
+.nb{
+  white-space:nowrap;padding:7px 10px;border-radius:4px;
+  border:1px solid var(--border);background:transparent;
+  color:var(--muted);font-size:11px;font-family:'DM Sans',sans-serif;
+  font-weight:400;cursor:pointer;transition:all .2s;
+  letter-spacing:.4px;text-transform:uppercase;
+  text-align:center;width:100%;
+}
+.nb:hover{color:var(--gold2);background:var(--gold3);border-color:var(--border2)}
+.nb.active{
+  color:var(--ink);background:var(--gold);border-color:var(--gold);
+  font-weight:500;
+}
+
+/* ── PAGE ── */
+.page{max-width:720px;margin:0 auto;padding:0 0 6rem}
+
+/* ── SECTION ── */
+.sa{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.sa.vis{opacity:1;transform:none}
+.sec-img{
+  width:100%;height:220px;
+  background-size:cover;background-position:center;
+  position:relative;
+}
+.sec-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,6,4,0.1) 0%,rgba(10,6,4,0.85) 100%);
+  display:flex;align-items:flex-end;padding:1.5rem 1.5rem;
+}
+.sec-ttl{
+  font-family:'Cinzel',serif;font-size:1.6rem;font-weight:600;
+  letter-spacing:3px;color:var(--cream);
+  text-shadow:0 2px 12px rgba(0,0,0,.8);
+}
+.sec-body{padding:0 1.2rem 1rem}
+
+/* ── NOTE ── */
+.note{
+  font-size:11px;letter-spacing:.3px;color:var(--lacquer2);
+  background:rgba(124,16,16,0.15);border-left:2px solid var(--lacquer);
+  padding:7px 12px;margin:1rem 0;
+}
+
+/* ── COLUMN HEADERS ── */
+.h2g{
+  display:grid;grid-template-columns:28px 1fr 70px 80px;
+  padding:8px 0 4px;
+  font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);margin-bottom:2px;
+}
+.h3g{
+  display:grid;grid-template-columns:28px 1fr 70px 80px 70px;
+  padding:8px 0 4px;
+  font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);margin-bottom:2px;
+}
+.bocg{
+  display:grid;grid-template-columns:28px 1fr 70px 70px;
+  padding:8px 0 4px;
+  font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);margin-bottom:2px;
+}
+.hc{text-align:right;padding-right:4px}
+
+/* ── ROWS ── */
+.row{
+  border-bottom:1px solid rgba(196,145,42,0.07);
+  padding:9px 2px;
+  transition:background .15s;
+}
+.row:hover{background:var(--surface)}
+.r2g{display:grid;grid-template-columns:28px 1fr 70px 80px;align-items:center;gap:4px}
+.r3g{display:grid;grid-template-columns:28px 1fr 70px 80px 70px;align-items:center;gap:4px}
+.rn{font-size:11px;color:var(--dim)}
+.rm{font-size:13.5px;font-weight:400;color:var(--cream);line-height:1.35}
+.rc{font-size:13px;color:var(--muted);text-align:right;padding-right:4px}
+.rp{text-align:right}
+.rf{font-size:12px;color:var(--dim);text-align:right;padding-right:4px}
+.rf.dim{color:var(--muted);opacity:.4}
+.pt1{
+  display:inline-block;font-size:13px;font-weight:500;color:var(--gold);
+  background:var(--gold3);border:1px solid var(--border);
+  border-radius:3px;padding:2px 8px;min-width:52px;text-align:center;
+}
+.pt2{
+  display:inline-block;font-size:15px;font-weight:600;color:var(--gold2);
+  background:rgba(196,145,42,0.18);border:1px solid var(--border2);
+  border-radius:3px;padding:2px 10px;min-width:52px;text-align:center;
+}
+.bdg{
+  display:inline-block;font-size:9px;font-weight:600;
+  background:rgba(196,145,42,0.2);color:var(--gold2);
+  border:1px solid var(--border);border-radius:3px;
+  padding:1px 6px;margin-left:6px;vertical-align:middle;
+}
+
+/* ROW sin grid (solo 1 precio) */
+.row-1{
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid rgba(196,145,42,0.07);
+  padding:9px 2px;transition:background .15s;
+}
+.row-1:hover{background:var(--surface)}
+.row-1 .rn{flex-shrink:0;width:28px}
+.row-1 .rm{flex:1}
+.row-1 .rp{flex-shrink:0}
+
+/* BOC rows */
+.boc-row{
+  display:grid;grid-template-columns:28px 1fr 70px 70px;
+  align-items:center;gap:4px;
+  border-bottom:1px solid rgba(196,145,42,0.07);
+  padding:9px 2px;transition:background .15s;
+}
+.boc-row:hover{background:var(--surface)}
+.boc-p{font-size:13px;color:var(--gold);font-weight:500;text-align:right;padding-right:4px}
+
+/* ── COMBOS ── */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:4px}
+.cc{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:12px;
+  transition:border-color .2s,transform .2s;
+}
+.cc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.ccn{font-size:10px;color:var(--dim);letter-spacing:.5px;margin-bottom:4px}
+.ccm{font-size:12.5px;color:var(--cream);font-weight:400;line-height:1.4;margin-bottom:8px}
+.ccp{font-size:15px;font-weight:600;color:var(--gold)}
+
+/* ── POLLO BRASA GRID ── */
+.brgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:4px}
+.brc{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:12px;text-align:center;
+  transition:border-color .2s,transform .2s;
+}
+.brc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.brn{font-size:10px;color:var(--dim);margin-bottom:4px;display:block}
+.brm{font-size:13px;font-weight:500;color:var(--cream);margin-bottom:8px}
+.brp{font-size:18px;font-weight:600;color:var(--gold)}
+.extras{
+  display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;
+}
+.extras span{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:4px;padding:8px 14px;font-size:13px;color:var(--cream);
+}
+.extras b{color:var(--gold)}
+
+/* ── FAMILIAR ── */
+.famgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:4px}
+.famc{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:12px;
+  transition:border-color .2s;
+}
+.famc:hover{border-color:var(--border2)}
+.famn{font-size:13px;font-weight:500;color:var(--cream);margin-bottom:6px;line-height:1.3}
+.famp{font-size:16px;font-weight:600;color:var(--gold)}
+
+/* ── BEBIDAS ── */
+.bebgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:4px}
+.bebc{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:10px 12px;
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  transition:border-color .2s;
+}
+.bebc:hover{border-color:var(--border2)}
+.bebn{font-size:12.5px;color:var(--cream)}
+.bebp{font-size:14px;font-weight:600;color:var(--gold);flex-shrink:0}
+
+/* ── SUBDIV ── */
+.subdiv{
+  display:flex;align-items:center;gap:12px;
+  margin:1.4rem 0 .4rem;
+}
+.subdiv span{
+  font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:2px;
+  text-transform:uppercase;color:var(--gold);white-space:nowrap;
+}
+.subdiv::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── FOOTER ── */
+footer{
+  background:radial-gradient(ellipse 80% 60% at 50% 80%,#2A0505 0%,var(--ink) 100%);
+  border-top:1px solid var(--border);
+  padding:3rem 1.5rem 4rem;text-align:center;
+}
+.ft-logo{
+  font-family:'Cinzel',serif;font-size:1.6rem;font-weight:700;letter-spacing:4px;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.4rem;
+}
+.ft-info{font-size:13px;color:var(--muted);line-height:2.4;margin:1.2rem 0}
+.ft-phone{font-size:1.1rem;font-weight:500;color:var(--gold2);letter-spacing:1px}
+.wsp{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 40px;background:#25D366;color:#fff;
+  border-radius:4px;font-size:14px;font-weight:500;
+  text-decoration:none;font-family:'DM Sans',sans-serif;
+  letter-spacing:.5px;text-transform:uppercase;
+  transition:transform .2s,box-shadow .2s;margin-top:.5rem;
+}
+.wsp:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.3)}
+.ft-legal{margin-top:2rem;font-size:10px;color:var(--dim);letter-spacing:.5px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:500px){
+  .hero-char{font-size:220px}
+  .hero-name{font-size:1.9rem}
+  .h3g{grid-template-columns:24px 1fr 58px 68px 58px}
+  .h2g{grid-template-columns:24px 1fr 58px 68px}
+  .r2g{grid-template-columns:24px 1fr 58px 68px}
+  .r3g{grid-template-columns:24px 1fr 58px 68px 58px}
+  .bocg,.boc-row{grid-template-columns:24px 1fr 60px 60px}
+  .cgrid,.brgrid,.famgrid,.bebgrid{grid-template-columns:1fr}
+  .sec-img{height:180px}
+  .sec-body{padding:0 .8rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-char">HY</div>
+  <div class="hero-char2">&#40607;</div>
+  <div class="medallion"><span class="medallion-char">&#40607;</span></div>
+  <h1 class="hero-name">CHIFA HONGYUN</h1>
+  <p class="hero-sub">Carta Digital</p>
+  <div class="orn"><div class="orn-l"></div><div class="orn-d"></div><div class="orn-r"></div></div>
+  <div class="scroll-hint">Ver carta</div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap" id="navWrap">
+  <div class="nav-toggle" onclick="toggleNav()">
+    <div class="nav-toggle-left">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0">
+        <rect y="2" width="16" height="1.5" rx=".75" fill="#C4912A"/>
+        <rect y="7.25" width="16" height="1.5" rx=".75" fill="#C4912A"/>
+        <rect y="12.5" width="16" height="1.5" rx=".75" fill="#C4912A"/>
+      </svg>
+      <span class="nav-toggle-label">Categorias</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span class="nav-active-name" id="navActiveName">Sopas</span>
+      <span class="nav-arrow">&#9660;</span>
+    </div>
+  </div>
+  <div class="nav-panel">
+    <div class="nav-grid">
+    <button class="nb" onclick="nav('sopas',this)">Sopas</button>
+    <button class="nb" onclick="nav('bocaditos',this)">Bocaditos</button>
+    <button class="nb" onclick="nav('combos',this)">Combos</button>
+    <button class="nb" onclick="nav('chaufa',this)">Chaufa</button>
+    <button class="nb" onclick="nav('aeropuerto',this)">Aeropuerto</button>
+    <button class="nb" onclick="nav('tallarin',this)">Tallarin Saltado</button>
+    <button class="nb" onclick="nav('frejolito',this)">Frejolito</button>
+    <button class="nb" onclick="nav('dulce',this)">Platos Dulce</button>
+    <button class="nb" onclick="nav('verdura',this)">Verdura Saltado</button>
+    <button class="nb" onclick="nav('champi',this)">Champinon Saltado</button>
+    <button class="nb" onclick="nav('combinado',this)">Combinado</button>
+    <button class="nb" onclick="nav('fritas',this)">Fritas</button>
+    <button class="nb" onclick="nav('tortilla',this)">Tortilla</button>
+    <button class="nb" onclick="nav('lomo',this)">Lomo Saltado</button>
+    <button class="nb" onclick="nav('brasa',this)">Pollo a la Brasa</button>
+    <button class="nb" onclick="nav('familiar',this)">Platos Familiar</button>
+    <button class="nb" onclick="nav('bebidas',this)">Bebidas</button>
+    </div>
+  </div>
+</div>
+
+<!-- SECTIONS -->
+<div class="page"><section id="sec-sopas" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/WontonSoup.jpg/800px-WontonSoup.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Sopas</h2></div></div><div class="sec-body"><p class="note">Todo menu incluye Sopa Wantan o Wantan Fritos</p><div class="row"><span class="rn">1</span><span class="rm">Sopa de Menu</span><span class="rp"><span class="pt1">5.50</span></span></div><div class="row"><span class="rn">2</span><span class="rm">Sopa Wantan Pollo</span><span class="rp"><span class="pt1">14.00</span></span></div><div class="row"><span class="rn">3</span><span class="rm">Sopa Wantan con Kion</span><span class="rp"><span class="pt1">14.50</span></span></div><div class="row"><span class="rn">4</span><span class="rm">Sopa Wantan Chancho Asado</span><span class="rp"><span class="pt1">15.00</span></span></div><div class="row"><span class="rn">5</span><span class="rm">Sopa Wantan Mixto</span><span class="rp"><span class="pt1">16.50</span></span></div><div class="row"><span class="rn">6</span><span class="rm">Sopa Wantan Carne de Res</span><span class="rp"><span class="pt1">15.50</span></span></div><div class="row"><span class="rn">7</span><span class="rm">Sopa Wantan Especial<span class="bdg">&#9733;</span></span><span class="rp"><span class="pt1">17.50</span></span></div><div class="row"><span class="rn">8</span><span class="rm">Sopa Wantan Langostinos</span><span class="rp"><span class="pt1">16.50</span></span></div><div class="row"><span class="rn">9</span><span class="rm">Sopa Fuchifu</span><span class="rp"><span class="pt1">16.50</span></span></div><div class="row"><span class="rn">10</span><span class="rm">Sopa Pac Pow</span><span class="rp"><span class="pt1">17.50</span></span></div><div class="row"><span class="rn">11</span><span class="rm">Sopa Fansi con Pollo</span><span class="rp"><span class="pt1">16.00</span></span></div><div class="row"><span class="rn">12</span><span class="rm">Sopa Wantan Especial Familiar</span><span class="rp"><span class="pt2">55.00</span></span></div><div class="row"><span class="rn">300</span><span class="rm">Sopa Fansi Especial</span><span class="rp"><span class="pt1">18.50</span></span></div><div class="row"><span class="rn">537</span><span class="rm">Sopa con Huevo de Codorniz</span><span class="rp"><span class="pt1">17.00</span></span></div></div></section><section id="sec-bocaditos" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Fried_wontons.jpg/800px-Fried_wontons.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Bocaditos</h2></div></div><div class="sec-body"><div class="bocg"><span></span><span></span><span class="hc">&#189; Doc</span><span class="hc">1 Doc</span></div><div class="row bocg"><span class="rn">13</span><span class="rm">Wantan Frito</span><span class="rc">6.00</span><span class="rc">11.00</span></div><div class="row bocg"><span class="rn">14</span><span class="rm">Wantan Frito Especial</span><span class="rc">16.00</span><span class="rc">27.00</span></div><div class="row bocg"><span class="rn">15</span><span class="rm">Alita Frita</span><span class="rc">17.00</span><span class="rc">31.00</span></div><div class="row bocg"><span class="rn">16</span><span class="rm">Langostino Arrebozado</span><span class="rc">17.00</span><span class="rc">33.00</span></div><div class="row bocg"><span class="rn">17</span><span class="rm">Pollo Arrebozado</span><span class="rc">16.00</span><span class="rc">31.00</span></div><div class="row bocg"><span class="rn">18</span><span class="rm">Nabo Encurtido</span><span class="rc">7.50</span><span class="rc">14.00</span></div><div class="row bocg"><span class="rn">19</span><span class="rm">Papa Fritas</span><span class="rc">-</span><span class="rc">10.00</span></div><div class="row bocg"><span class="rn">20</span><span class="rm">Porcion Arroz Blanco</span><span class="rc">-</span><span class="rc">5.00</span></div><div class="row bocg"><span class="rn">21</span><span class="rm">Sui Mai</span><span class="rc">16.50</span><span class="rc">32.00</span></div><div class="row bocg"><span class="rn">22</span><span class="rm">Enrollado Primavera</span><span class="rc">17.50</span><span class="rc">32.00</span></div><div class="row bocg"><span class="rn">196</span><span class="rm">Min Pao</span><span class="rc">-</span><span class="rc">5.50</span></div></div></section><section id="sec-combos" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Arroz_chaufa_simple.JPG/800px-Arroz_chaufa_simple.JPG)"><div class="sec-img-overlay"><h2 class="sec-ttl">Combos</h2></div></div><div class="sec-body"><p class="note">Incluye Sopa Wantan o Wantan Fritos</p><div class="cgrid"><div class="cc"><span class="ccn">#23</span><p class="ccm">Pollo c/Pina + Chijuakau + Chaufa</p><span class="ccp">S/ 26.00</span></div><div class="cc"><span class="ccn">#24</span><p class="ccm">Tipakay + Chijuakay + Chaufa</p><span class="ccp">S/ 26.00</span></div><div class="cc"><span class="ccn">#25</span><p class="ccm">Tallarin c/Pollo + Enrollado + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#26</span><p class="ccm">Pollo c/Verdura + Chicharron + Chaufa</p><span class="ccp">S/ 26.00</span></div><div class="cc"><span class="ccn">#27</span><p class="ccm">Alita Frita + Pollo c/Verdura + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#28</span><p class="ccm">Kanlu Wuantan + Enrollado + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#29</span><p class="ccm">Tipakay + Alita Frita + Chaufa</p><span class="ccp">S/ 26.00</span></div><div class="cc"><span class="ccn">#30</span><p class="ccm">Limonkay + Chijaukay + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#31</span><p class="ccm">Tallarin + Tipakay + Chaufa</p><span class="ccp">S/ 26.00</span></div><div class="cc"><span class="ccn">#32</span><p class="ccm">Chicharron + Pollo c/Pina + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#33</span><p class="ccm">Chijaukay + Pollo c/Verdura + Chaufa</p><span class="ccp">S/ 26.00</span></div><div class="cc"><span class="ccn">#34</span><p class="ccm">Kamlu Wuantan + Chijaukay + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#35</span><p class="ccm">Chijaukay + Chicharron + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#36</span><p class="ccm">Pollo c/Tamarindo + Enrollado + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#37</span><p class="ccm">Enrollado + Chijaukay + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#38</span><p class="ccm">Pollo c/Verdura + Enrollado + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#39</span><p class="ccm">Pollo c/Verdura + Limonkay + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#40</span><p class="ccm">Malankay + Pollo c/Pina + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#41</span><p class="ccm">Malankay + Tallarin + Chaufa</p><span class="ccp">S/ 27.00</span></div><div class="cc"><span class="ccn">#42</span><p class="ccm">Pollo c/Pina + Pollo c/Verdura + Chaufa</p><span class="ccp">S/ 27.00</span></div></div></div></section><section id="sec-chaufa" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Arroz_chaufa_simple.JPG/800px-Arroz_chaufa_simple.JPG)"><div class="sec-img-overlay"><h2 class="sec-ttl">Chaufa</h2></div></div><div class="sec-body"><p class="note">Todo menu incluye Sopa Wantan o Wantan Fritos</p><div class="h3g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span><span class="hc">Familiar</span></div><div class="row r3g"><span class="rn">43</span><span class="rm">Chaufa c/Pollo</span><span class="rc">13.50</span><span class="rp"><span class="pt1">21.00</span></span><span class="rf">37.00</span></div><div class="row r3g"><span class="rn">44</span><span class="rm">Chaufa c/Chancho Asado</span><span class="rc">16.50</span><span class="rp"><span class="pt1">23.00</span></span><span class="rf">38.00</span></div><div class="row r3g"><span class="rn">45</span><span class="rm">Chaufa c/Carne de Res</span><span class="rc">17.00</span><span class="rp"><span class="pt1">24.00</span></span><span class="rf">40.00</span></div><div class="row r3g"><span class="rn">46</span><span class="rm">Chaufa c/Langostinos</span><span class="rc">17.50</span><span class="rp"><span class="pt1">25.00</span></span><span class="rf">42.00</span></div><div class="row r3g"><span class="rn">47</span><span class="rm">Chaufa c/Champinones</span><span class="rc">16.50</span><span class="rp"><span class="pt1">24.00</span></span><span class="rf">42.00</span></div><div class="row r3g"><span class="rn">48</span><span class="rm">Chaufa c/Hot Dog</span><span class="rc">17.00</span><span class="rp"><span class="pt1">23.00</span></span><span class="rf">42.00</span></div><div class="row r3g"><span class="rn">50</span><span class="rm">Chaufa c/Pollo en Trozos</span><span class="rc">19.00</span><span class="rp"><span class="pt1">30.00</span></span><span class="rf">48.00</span></div><div class="row r3g"><span class="rn">51</span><span class="rm">Chaufa Salvaje</span><span class="rc">17.50</span><span class="rp"><span class="pt1">26.00</span></span><span class="rf">45.00</span></div><div class="row r3g"><span class="rn">52</span><span class="rm">Chaufa Mixto</span><span class="rc">18.00</span><span class="rp"><span class="pt1">28.00</span></span><span class="rf">50.00</span></div><div class="row r3g"><span class="rn">53</span><span class="rm">Chaufa Especial<span class="bdg">&#9733;</span></span><span class="rc">19.00</span><span class="rp"><span class="pt1">30.00</span></span><span class="rf">53.00</span></div><div class="row r3g"><span class="rn">54</span><span class="rm">Chaufa Taypa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">32.00</span></span><span class="rf">55.00</span></div><div class="row r3g"><span class="rn">196</span><span class="rm">Chaufa Salvaje Trozos</span><span class="rc">21.00</span><span class="rp"><span class="pt1">30.00</span></span><span class="rf">55.00</span></div></div></section><section id="sec-aeropuerto" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Arroz_chaufa_con_pollo.jpg/800px-Arroz_chaufa_con_pollo.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Aeropuerto</h2></div></div><div class="sec-body"><p class="note">Todo menu incluye Sopa Wantan o Wantan Fritos</p><div class="h3g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span><span class="hc">Familiar</span></div><div class="row r3g"><span class="rn">55</span><span class="rm">Aeropuerto c/Pollo</span><span class="rc">16.00</span><span class="rp"><span class="pt1">23.00</span></span><span class="rf">42.00</span></div><div class="row r3g"><span class="rn">56</span><span class="rm">Aeropuerto c/Chancho</span><span class="rc">17.00</span><span class="rp"><span class="pt1">25.00</span></span><span class="rf">44.00</span></div><div class="row r3g"><span class="rn">57</span><span class="rm">Aeropuerto c/Carne</span><span class="rc">17.50</span><span class="rp"><span class="pt1">25.00</span></span><span class="rf">45.00</span></div><div class="row r3g"><span class="rn">58</span><span class="rm">Aeropuerto c/Langostinos</span><span class="rc">18.00</span><span class="rp"><span class="pt1">26.00</span></span><span class="rf">46.00</span></div><div class="row r3g"><span class="rn">59</span><span class="rm">Aeropuerto Mixto</span><span class="rc">18.50</span><span class="rp"><span class="pt1">30.00</span></span><span class="rf">48.00</span></div><div class="row r3g"><span class="rn">60</span><span class="rm">Aeropuerto c/Champinones</span><span class="rc">17.50</span><span class="rp"><span class="pt1">26.00</span></span><span class="rf">47.00</span></div><div class="row r3g"><span class="rn">61</span><span class="rm">Aeropuerto c/Pollo en Trozos</span><span class="rc">19.50</span><span class="rp"><span class="pt1">31.00</span></span><span class="rf">50.00</span></div><div class="row r3g"><span class="rn">62</span><span class="rm">Aeropuerto Especial<span class="bdg">&#9733;</span></span><span class="rc">20.00</span><span class="rp"><span class="pt1">31.00</span></span><span class="rf">55.00</span></div><div class="row r3g"><span class="rn">63</span><span class="rm">Aeropuerto c/Hot Dog</span><span class="rc">17.50</span><span class="rp"><span class="pt1">26.00</span></span><span class="rf">47.00</span></div></div></section><section id="sec-tallarin" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Tallarin_saltado.jpg/800px-Tallarin_saltado.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Tallarin Saltado</h2></div></div><div class="sec-body"><p class="note">Todo menu incluye Sopa Wantan o Wantan Fritos</p><div class="h3g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span><span class="hc">Familiar</span></div><div class="row r3g"><span class="rn">65</span><span class="rm">Tallarin c/Pollo</span><span class="rc">15.50</span><span class="rp"><span class="pt1">21.00</span></span><span class="rf">40.00</span></div><div class="row r3g"><span class="rn">66</span><span class="rm">Tallarin c/Chancho Asado</span><span class="rc">16.50</span><span class="rp"><span class="pt1">23.00</span></span><span class="rf">42.00</span></div><div class="row r3g"><span class="rn">67</span><span class="rm">Tallarin c/Carne de Res</span><span class="rc">17.50</span><span class="rp"><span class="pt1">24.00</span></span><span class="rf">43.00</span></div><div class="row r3g"><span class="rn">68</span><span class="rm">Tallarin c/Langostinos</span><span class="rc">18.00</span><span class="rp"><span class="pt1">25.00</span></span><span class="rf">45.00</span></div><div class="row r3g"><span class="rn">69</span><span class="rm">Tallarin c/Champinones</span><span class="rc">17.50</span><span class="rp"><span class="pt1">26.00</span></span><span class="rf">42.00</span></div><div class="row r3g"><span class="rn">70</span><span class="rm">Tallarin Especial<span class="bdg">&#9733;</span></span><span class="rc">19.00</span><span class="rp"><span class="pt1">30.00</span></span><span class="rf">49.00</span></div><div class="row r3g"><span class="rn">71</span><span class="rm">Tallarin Mixto</span><span class="rc">19.00</span><span class="rp"><span class="pt1">27.00</span></span><span class="rf">48.00</span></div><div class="row r3g"><span class="rn">72</span><span class="rm">Tallarin Taypa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">28.00</span></span><span class="rf">52.00</span></div><div class="row r3g"><span class="rn">73</span><span class="rm">Tallarin c/Pollo en Trozo</span><span class="rc">19.00</span><span class="rp"><span class="pt1">30.00</span></span><span class="rf">52.00</span></div><div class="row r3g"><span class="rn">74</span><span class="rm">Tallarin c/Pollo Chijaukay</span><span class="rc">20.00</span><span class="rp"><span class="pt1">32.00</span></span><span class="rf">51.00</span></div><div class="row r3g"><span class="rn">75</span><span class="rm">Tallarin c/Pollo Enrollado</span><span class="rc">21.00</span><span class="rp"><span class="pt1">32.00</span></span><span class="rf">52.00</span></div><div class="row r3g"><span class="rn">76</span><span class="rm">Fansi Saltado</span><span class="rc">18.00</span><span class="rp"><span class="pt1">30.00</span></span><span class="rf dim">-</span></div><div class="row r3g"><span class="rn">77</span><span class="rm">Tallarin Sansi</span><span class="rc">-</span><span class="rp"><span class="pt1">32.00</span></span><span class="rf dim">-</span></div><div class="row r3g"><span class="rn">301</span><span class="rm">Fansi Saltado con Especial</span><span class="rc">21.00</span><span class="rp"><span class="pt1">34.00</span></span><span class="rf dim">-</span></div><div class="subdiv"><span>Tallarin Frito</span></div><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">78</span><span class="rm">Tallarin Frito c/Pollo</span><span class="rc">19.00</span><span class="rp"><span class="pt1">23.00</span></span></div><div class="row r2g"><span class="rn">79</span><span class="rm">Tallarin Frito c/Chancho</span><span class="rc">19.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">80</span><span class="rm">Tallarin Frito c/Carne</span><span class="rc">19.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">81</span><span class="rm">Tallarin Frito c/Langostinos</span><span class="rc">19.50</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">82</span><span class="rm">Tallarin Frito Mixto</span><span class="rc">20.00</span><span class="rp"><span class="pt1">28.00</span></span></div><div class="row r2g"><span class="rn">83</span><span class="rm">Tallarin Frito Especial<span class="bdg">&#9733;</span></span><span class="rc">22.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">84</span><span class="rm">Tallarin Frito c/Champinones</span><span class="rc">20.00</span><span class="rp"><span class="pt1">27.00</span></span></div><div class="row r2g"><span class="rn">85</span><span class="rm">Tallarin Frito c/Pollo en Trozo</span><span class="rc">22.00</span><span class="rp"><span class="pt1">32.00</span></span></div><div class="row r2g"><span class="rn">86</span><span class="rm">Tallarin Frito c/Taypa</span><span class="rc">22.00</span><span class="rp"><span class="pt1">32.00</span></span></div></div></section><section id="sec-frejolito" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Bean_sprouts_stir_fry.jpg/800px-Bean_sprouts_stir_fry.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Frejolito</h2></div></div><div class="sec-body"><p class="note">Chaufa a la carta +5.00</p><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">87</span><span class="rm">Frejolito c/Pollo + Chaufa</span><span class="rc">18.00</span><span class="rp"><span class="pt1">23.00</span></span></div><div class="row r2g"><span class="rn">88</span><span class="rm">Frejolito c/Chancho Asado</span><span class="rc">18.50</span><span class="rp"><span class="pt1">24.00</span></span></div><div class="row r2g"><span class="rn">89</span><span class="rm">Frejolito c/Carne de Res</span><span class="rc">18.50</span><span class="rp"><span class="pt1">24.50</span></span></div><div class="row r2g"><span class="rn">90</span><span class="rm">Frejolito c/Langostino</span><span class="rc">19.00</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">91</span><span class="rm">Frejolito Mixto</span><span class="rc">18.50</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">92</span><span class="rm">Frejolito c/Pollo en Trozos</span><span class="rc">19.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">93</span><span class="rm">Frejolito Especial<span class="bdg">&#9733;</span></span><span class="rc">20.00</span><span class="rp"><span class="pt1">30.00</span></span></div></div></section><section id="sec-dulce" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sweet_and_sour_pork.jpg/800px-Sweet_and_sour_pork.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Platos Dulce</h2></div></div><div class="sec-body"><p class="note">Chaufa a la carta +5.00</p><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">94</span><span class="rm">Kam Lu Wantan + Chaufa Dulce</span><span class="rc">19.50</span><span class="rp"><span class="pt1">27.00</span></span></div><div class="row r2g"><span class="rn">95</span><span class="rm">Pollo c/Durazno + Chaufa</span><span class="rc">18.00</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">96</span><span class="rm">Pollo c/Durazno Trozos + Chaufa</span><span class="rc">21.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">97</span><span class="rm">Durazno c/Langostinos + Chaufa</span><span class="rc">18.50</span><span class="rp"><span class="pt1">27.00</span></span></div><div class="row r2g"><span class="rn">98</span><span class="rm">Pollo Tamarindo + Chaufa</span><span class="rc">17.00</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">99</span><span class="rm">Chancho Tamarindo + Chaufa</span><span class="rc">18.50</span><span class="rp"><span class="pt1">27.00</span></span></div><div class="row r2g"><span class="rn">100</span><span class="rm">Langostino c/Tamarindo + Chaufa</span><span class="rc">19.50</span><span class="rp"><span class="pt1">28.50</span></span></div><div class="row r2g"><span class="rn">101</span><span class="rm">Pollo c/Pina + Chaufa</span><span class="rc">17.50</span><span class="rp"><span class="pt1">24.00</span></span></div><div class="row r2g"><span class="rn">102</span><span class="rm">Pollo c/Pina en Trozos + Chaufa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">103</span><span class="rm">Pollo Enrollado c/Pina + Chaufa</span><span class="rc">22.00</span><span class="rp"><span class="pt1">32.00</span></span></div><div class="row r2g"><span class="rn">104</span><span class="rm">Chijaukay c/Pina + Chaufa</span><span class="rc">21.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">105</span><span class="rm">Alitas c/Pina + Chaufa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">106</span><span class="rm">Langostino c/Pina + Chaufa</span><span class="rc">19.50</span><span class="rp"><span class="pt1">27.00</span></span></div></div></section><section id="sec-verdura" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Stir-fried_vegetables.jpg/800px-Stir-fried_vegetables.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Verdura Saltado</h2></div></div><div class="sec-body"><p class="note">Chaufa a la carta +5.00</p><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">107</span><span class="rm">Verdura c/Pollo + Chaufa</span><span class="rc">18.50</span><span class="rp"><span class="pt1">23.00</span></span></div><div class="row r2g"><span class="rn">108</span><span class="rm">Verdura c/Chancho Asado + Chaufa</span><span class="rc">18.50</span><span class="rp"><span class="pt1">24.00</span></span></div><div class="row r2g"><span class="rn">109</span><span class="rm">Verdura c/Carne de Res + Chaufa</span><span class="rc">18.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">110</span><span class="rm">Verdura Mixto + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">111</span><span class="rm">Verdura c/Langostinos + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">112</span><span class="rm">Verdura c/Pollo en Trozos + Chaufa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">113</span><span class="rm">Verdura Taypa + Chaufa</span><span class="rc">21.00</span><span class="rp"><span class="pt1">29.00</span></span></div><div class="row r2g"><span class="rn">114</span><span class="rm">Verdura c/Huevo de Codorniz + Chaufa</span><span class="rc">19.50</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">115</span><span class="rm">Verdura Especial + Chaufa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">31.00</span></span></div><div class="subdiv"><span>Tausi</span></div><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">116</span><span class="rm">Tausi c/Pollo + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">24.00</span></span></div><div class="row r2g"><span class="rn">117</span><span class="rm">Tausi c/Chancho Asado + Chaufa</span><span class="rc">19.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">118</span><span class="rm">Tausi c/Carne de Res + Chaufa</span><span class="rc">19.50</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">119</span><span class="rm">Tausi c/Langostinos + Chaufa</span><span class="rc">19.50</span><span class="rp"><span class="pt1">28.00</span></span></div><div class="row r2g"><span class="rn">120</span><span class="rm">Tausi Mixto + Chaufa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">28.00</span></span></div><div class="row r2g"><span class="rn">121</span><span class="rm">Tausi Especial + Chaufa</span><span class="rc">20.50</span><span class="rp"><span class="pt1">29.00</span></span></div><div class="row r2g"><span class="rn">122</span><span class="rm">Tausi c/Pollo en Trozos + Chaufa</span><span class="rc">21.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="subdiv"><span>Al Ajo</span></div><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">123</span><span class="rm">Pollo al Ajo + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">24.00</span></span></div><div class="row r2g"><span class="rn">124</span><span class="rm">Chancho Asado al Ajo + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">125</span><span class="rm">Carne de Res al Ajo + Chaufa</span><span class="rc">19.50</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">126</span><span class="rm">Langostinos al Ajo + Chaufa</span><span class="rc">19.50</span><span class="rp"><span class="pt1">28.00</span></span></div><div class="row r2g"><span class="rn">127</span><span class="rm">Mixto al Ajo + Chaufa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">28.00</span></span></div><div class="row r2g"><span class="rn">128</span><span class="rm">Pollo en Trozos al Ajo + Chaufa</span><span class="rc">20.50</span><span class="rp"><span class="pt1">29.00</span></span></div><div class="row r2g"><span class="rn">129</span><span class="rm">Especial al Ajo + Chaufa</span><span class="rc">21.00</span><span class="rp"><span class="pt1">30.00</span></span></div></div></section><section id="sec-champi" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Stir_fried_mushroom.jpg/800px-Stir_fried_mushroom.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Champinon Saltado</h2></div></div><div class="sec-body"><p class="note">Chaufa a la carta +5.00</p><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">130</span><span class="rm">Champinon c/Pollo + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">131</span><span class="rm">Champinon c/Chancho + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">132</span><span class="rm">Champinon c/Carne de Res</span><span class="rc">20.00</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">133</span><span class="rm">Champinon c/Langostinos + Chaufa</span><span class="rc">21.00</span><span class="rp"><span class="pt1">27.00</span></span></div><div class="row r2g"><span class="rn">134</span><span class="rm">Champinon Mixto + Chaufa</span><span class="rc">21.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">135</span><span class="rm">Champinon Especial + Chaufa<span class="bdg">&#9733;</span></span><span class="rc">23.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">136</span><span class="rm">Champinon Huevo de Codorniz + Chaufa</span><span class="rc">24.00</span><span class="rp"><span class="pt1">28.00</span></span></div><div class="row r2g"><span class="rn">137</span><span class="rm">Champinon c/Pollo en Trozos</span><span class="rc">22.00</span><span class="rp"><span class="pt1">31.00</span></span></div></div></section><section id="sec-combinado" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Arroz_chaufa_simple.JPG/800px-Arroz_chaufa_simple.JPG)"><div class="sec-img-overlay"><h2 class="sec-ttl">Combinado</h2></div></div><div class="sec-body"><p class="note">Todo incluye Sopa Wantan o Wantan Fritos</p><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">138</span><span class="rm">Combinado c/Pollo</span><span class="rc">17.00</span><span class="rp"><span class="pt1">24.00</span></span></div><div class="row r2g"><span class="rn">139</span><span class="rm">Combinado c/Chancho</span><span class="rc">17.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">140</span><span class="rm">Combinado c/Carne</span><span class="rc">17.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">141</span><span class="rm">Combinado c/Langostinos</span><span class="rc">18.00</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">142</span><span class="rm">Combinado c/Champinones</span><span class="rc">17.50</span><span class="rp"><span class="pt1">27.00</span></span></div><div class="row r2g"><span class="rn">143</span><span class="rm">Combinado Mixto</span><span class="rc">19.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">144</span><span class="rm">Combinado c/Pollo Trozos</span><span class="rc">20.00</span><span class="rp"><span class="pt1">29.00</span></span></div><div class="row r2g"><span class="rn">145</span><span class="rm">Combinado Especial<span class="bdg">&#9733;</span></span><span class="rc">20.00</span><span class="rp"><span class="pt1">31.00</span></span></div><div class="row r2g"><span class="rn">146</span><span class="rm">Combinado c/Taypa</span><span class="rc">21.00</span><span class="rp"><span class="pt1">31.00</span></span></div><div class="row r2g"><span class="rn">147</span><span class="rm">Combinado c/Pollo y Tausi</span><span class="rc">20.00</span><span class="rp"><span class="pt1">28.00</span></span></div><div class="row r2g"><span class="rn">148</span><span class="rm">Combinado c/Pollo Trozos Tausi</span><span class="rc">22.00</span><span class="rp"><span class="pt1">32.00</span></span></div></div></section><section id="sec-fritas" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Fried_chicken_on_plate.jpg/800px-Fried_chicken_on_plate.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Fritas</h2></div></div><div class="sec-body"><p class="note">Chaufa a la carta +5.00</p><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">149</span><span class="rm">Pollo Chijaukay + Chaufa<span class="bdg">&#9733;</span></span><span class="rc">18.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">150</span><span class="rm">Pollo Tipakay + Chaufa</span><span class="rc">18.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">151</span><span class="rm">Pollo Enrollado + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">152</span><span class="rm">Chicharron de Pollo + Chaufa</span><span class="rc">18.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">153</span><span class="rm">Pollo Limonkay + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">154</span><span class="rm">Pollo Malankay + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">28.00</span></span></div><div class="row r2g"><span class="rn">155</span><span class="rm">Enrollado c/Verdura + Chaufa</span><span class="rc">22.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">156</span><span class="rm">Chijaukay c/Verdura + Chaufa</span><span class="rc">21.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">157</span><span class="rm">Chicharron c/Papa + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">158</span><span class="rm">Alitas c/Papas + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">27.00</span></span></div><div class="row r2g"><span class="rn">159</span><span class="rm">Alitas c/Verdura + Chaufa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">29.00</span></span></div><div class="row r2g"><span class="rn">160</span><span class="rm">Alitas c/Tamarindo + Chaufa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">29.00</span></span></div><div class="row r2g"><span class="rn">161</span><span class="rm">Alita Picante + Chaufa</span><span class="rc">19.50</span><span class="rp"><span class="pt1">28.00</span></span></div><div class="row r2g"><span class="rn">162</span><span class="rm">Alita Tausi + Chaufa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="row r2g"><span class="rn">163</span><span class="rm">Langostino Arrebosado</span><span class="rc">19.00</span><span class="rp"><span class="pt1">29.00</span></span></div><div class="row r2g"><span class="rn">164</span><span class="rm">Pollo Arrebosado + Chaufa</span><span class="rc">18.00</span><span class="rp"><span class="pt1">27.00</span></span></div><div class="row r2g"><span class="rn">165</span><span class="rm">Alita Frita + Chaufa</span><span class="rc">18.50</span><span class="rp"><span class="pt1">26.00</span></span></div></div></section><section id="sec-tortilla" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Tortilla_de_huevos.jpg/800px-Tortilla_de_huevos.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Tortilla</h2></div></div><div class="sec-body"><p class="note">Todo menu incluye Sopa Wantan o Wantan Fritos</p><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">166</span><span class="rm">Tortilla c/Pollo + Chaufa</span><span class="rc">17.00</span><span class="rp"><span class="pt1">24.00</span></span></div><div class="row r2g"><span class="rn">167</span><span class="rm">Tortilla c/Chancho + Chaufa</span><span class="rc">17.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">168</span><span class="rm">Tortilla c/Carne de Res</span><span class="rc">17.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">169</span><span class="rm">Tortilla c/Langostinos</span><span class="rc">18.00</span><span class="rp"><span class="pt1">25.50</span></span></div><div class="row r2g"><span class="rn">170</span><span class="rm">Tortilla Mixta + Chaufa</span><span class="rc">17.50</span><span class="rp"><span class="pt1">25.00</span></span></div><div class="row r2g"><span class="rn">171</span><span class="rm">Tortilla c/Verdura + Chaufa</span><span class="rc">18.50</span><span class="rp"><span class="pt1">26.00</span></span></div><div class="row r2g"><span class="rn">172</span><span class="rm">Tortilla Especial + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">26.00</span></span></div></div></section><section id="sec-lomo" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Lomo_saltado.jpg/800px-Lomo_saltado.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Lomo Saltado</h2></div></div><div class="sec-body"><p class="note">Chaufa a la carta +5.00</p><div class="h2g"><span></span><span class="hc">Menu</span><span class="hc">A la Carta</span></div><div class="row r2g"><span class="rn">173</span><span class="rm">Lomo de Pollo + Chaufa</span><span class="rc">18.50</span><span class="rp"><span class="pt1">27.00</span></span></div><div class="row r2g"><span class="rn">174</span><span class="rm">Lomo de Carne + Chaufa</span><span class="rc">19.00</span><span class="rp"><span class="pt1">28.50</span></span></div><div class="row r2g"><span class="rn">175</span><span class="rm">Lomo Especial + Chaufa</span><span class="rc">20.00</span><span class="rp"><span class="pt1">30.00</span></span></div><div class="subdiv"><span>A la Plancha</span></div><div class="row"><span class="rn">539</span><span class="rm">Taypa a la Plancha</span><span class="rp"><span class="pt1">38.00</span></span></div><div class="row"><span class="rn">540</span><span class="rm">Carne a la Plancha</span><span class="rp"><span class="pt1">38.00</span></span></div><div class="row"><span class="rn">543</span><span class="rm">Lomo a la Plancha</span><span class="rp"><span class="pt1">38.00</span></span></div></div></section><section id="sec-brasa" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Pollo_a_la_brasa.jpg/800px-Pollo_a_la_brasa.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Pollo a la Brasa</h2></div></div><div class="sec-body"><div class="brgrid"><div class="brc"><span class="brn">#200</span><p class="brm">Salchipapa</p><span class="brp">S/ 13.00</span></div><div class="brc"><span class="brn">#201</span><p class="brm">1/8 de Pollo</p><span class="brp">S/ 16.00</span></div><div class="brc"><span class="brn">#202</span><p class="brm">1/4 de Pollo</p><span class="brp">S/ 20.00</span></div><div class="brc"><span class="brn">#203</span><p class="brm">1/4 Pollo + Chaufa</p><span class="brp">S/ 24.00</span></div><div class="brc"><span class="brn">#204</span><p class="brm">1/2 Pollo</p><span class="brp">S/ 36.00</span></div><div class="brc"><span class="brn">#205</span><p class="brm">1/2 Pollo + Chaufa</p><span class="brp">S/ 46.00</span></div><div class="brc"><span class="brn">#206</span><p class="brm">1 Pollo entero</p><span class="brp">S/ 67.00</span></div><div class="brc"><span class="brn">#207</span><p class="brm">1 Pollo + Chaufa</p><span class="brp">S/ 76.00</span></div><div class="brc"><span class="brn">#208</span><p class="brm">1 Pollo + Gaseosa</p><span class="brp">S/ 76.00</span></div><div class="brc"><span class="brn">#209</span><p class="brm">1 Pollo + Chaufa + Inka 2.5L</p><span class="brp">S/ 88.00</span></div><div class="brc"><span class="brn">#210</span><p class="brm">1 Pollo solo</p><span class="brp">S/ 40.00</span></div></div><div class="extras"><span>Huevo frito <b>S/ 2.50</b></span><span>Hot dog frito <b>S/ 3.00</b></span></div></div></section><section id="sec-familiar" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Arroz_chaufa_simple.JPG/800px-Arroz_chaufa_simple.JPG)"><div class="sec-img-overlay"><h2 class="sec-ttl">Platos Familiar</h2></div></div><div class="sec-body"><div class="famgrid"><div class="famc"><p class="famn">Pollo Chijuaky</p><span class="famp">S/ 45.00</span></div><div class="famc"><p class="famn">Pollo Tipakay</p><span class="famp">S/ 45.00</span></div><div class="famc"><p class="famn">Pollo Enrollado</p><span class="famp">S/ 48.00</span></div><div class="famc"><p class="famn">Kalu Wantan</p><span class="famp">S/ 48.00</span></div><div class="famc"><p class="famn">Enrollado c/Verdura</p><span class="famp">S/ 52.00</span></div><div class="famc"><p class="famn">Pollo Trozos c/Pina</p><span class="famp">S/ 52.00</span></div><div class="famc"><p class="famn">Pollo Limonkay</p><span class="famp">S/ 48.00</span></div><div class="famc"><p class="famn">Pollo Malakay</p><span class="famp">S/ 48.00</span></div><div class="famc"><p class="famn">Verdura c/Pollo en Trozos</p><span class="famp">S/ 55.00</span></div><div class="famc"><p class="famn">Chancho c/Tamarindo</p><span class="famp">S/ 48.00</span></div><div class="famc"><p class="famn">Verdura c/Pollo</p><span class="famp">S/ 42.00</span></div><div class="famc"><p class="famn">Durazno c/Pollo en Trozos</p><span class="famp">S/ 55.00</span></div></div></div></section><section id="sec-bebidas" class="sa"><div class="sec-img" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Puer_tea_cup.jpg/800px-Puer_tea_cup.jpg)"><div class="sec-img-overlay"><h2 class="sec-ttl">Bebidas</h2></div></div><div class="sec-body"><div class="bebgrid"><div class="bebc"><span class="bebn">Agua Mineral</span><span class="bebp">S/ 3.00</span></div><div class="bebc"><span class="bebn">Inca Cola / Coca Cola 296ml</span><span class="bebp">S/ 3.00</span></div><div class="bebc"><span class="bebn">Inca Cola 625ml</span><span class="bebp">S/ 6.00</span></div><div class="bebc"><span class="bebn">Inka Cola / Coca Cola 600ml</span><span class="bebp">S/ 4.50</span></div><div class="bebc"><span class="bebn">Fanta 500ml</span><span class="bebp">S/ 4.50</span></div><div class="bebc"><span class="bebn">Sprite</span><span class="bebp">S/ 4.50</span></div><div class="bebc"><span class="bebn">Inca Cola / Coca Cola 1.0L</span><span class="bebp">S/ 8.00</span></div><div class="bebc"><span class="bebn">Inca Cola / Coca Cola 1.5L</span><span class="bebp">S/ 10.00</span></div><div class="bebc"><span class="bebn">Inca Cola / Coca Cola 1.5L plastico</span><span class="bebp">S/ 11.00</span></div><div class="bebc"><span class="bebn">Inca Cola / Coca Cola 2.5L</span><span class="bebp">S/ 15.00</span></div><div class="bebc"><span class="bebn">Cafe</span><span class="bebp">S/ 4.50</span></div><div class="bebc"><span class="bebn">Te Caliente</span><span class="bebp">S/ 4.00</span></div><div class="bebc"><span class="bebn">Tetera</span><span class="bebp">S/ 10.00</span></div><div class="bebc"><span class="bebn">Cerveza Pilsen</span><span class="bebp">S/ 11.00</span></div><div class="bebc"><span class="bebn">Aloe 500ml</span><span class="bebp">S/ 10.00</span></div><div class="bebc"><span class="bebn">Aloe 1500ml</span><span class="bebp">S/ 18.00</span></div><div class="bebc"><span class="bebn">Limonada</span><span class="bebp">S/ 12.00</span></div><div class="bebc"><span class="bebn">Chicha Morada</span><span class="bebp">S/ 12.00</span></div></div></div></section>
+
+<footer>
+  <div class="ft-logo">HONGYUN</div>
+  <div class="ft-info">
+    Lima, Peru<br>
+    <span class="ft-phone">999 999 999</span><br>
+    Lun &ndash; Dom &nbsp; 12:00 pm &ndash; 10:00 pm
+  </div>
+  <a class="wsp" href="https://wa.me/51999999999">Pedir por WhatsApp</a>
+  <p class="ft-legal">Precios incluyen IGV &middot; Sujetos a cambio sin previo aviso</p>
+</footer>
+
+</div>
+
+<script>
+function toggleNav() {
+  var wrap = document.getElementById('navWrap');
+  wrap.classList.toggle('open');
+}
+function nav(id, btn) {
+  // Marcar activo
+  document.querySelectorAll('.nb').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  // Actualizar nombre visible
+  document.getElementById('navActiveName').textContent = btn.textContent.trim();
+  // Cerrar panel
+  document.getElementById('navWrap').classList.remove('open');
+  // Scroll a sección
+  var el = document.getElementById('sec-' + id);
+  if (el) {
+    var navH = document.getElementById('navWrap').offsetHeight;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH - 4, behavior: 'smooth' });
+  }
+}
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.05 });
+document.querySelectorAll('.sa').forEach(function(el) { obs.observe(el); });
+document.querySelector('.nb').classList.add('active');
+</script>
+</body>
+</html>
